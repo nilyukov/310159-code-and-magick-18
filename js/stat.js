@@ -33,8 +33,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.font = FONT;
   ctx.textBaseline = 'hanging';
-  ctx.fillText("Ура вы победили!", CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP);
-  ctx.fillText("Список результатов:", CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP * 2);
+  ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP);
+  ctx.fillText('Список результатов:', CLOUD_X + FONT_GAP, CLOUD_Y + FONT_GAP * 2);
 
   var maxTime = getMaxElement(times);
   for (var i = 0; i < names.length; i++) {
