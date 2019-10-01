@@ -5,17 +5,14 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var COUNT_SIMILAR_WIZARD = 4;
 
-var generateRandomDescriptionWizards = function () {
-  var descriptionWizards = [];
+var descriptionWizards = [];
 
-  for (var i = 0; i < COUNT_SIMILAR_WIZARD; i++) {
-    descriptionWizards.push({
+var generateRandomDescriptionWizard = function () {
+  return {
       name: NAMES[Math.floor(Math.random() * NAMES.length)] + ' ' + FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)],
       coatColor: COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)],
       eyeColor: EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)]
-    });
-  }
-  return descriptionWizards;
+    };
 };
 
 var renderWizard = function (descriptionWizard) {
@@ -30,9 +27,9 @@ var renderWizard = function (descriptionWizard) {
 var fillSimilarList = function () {
   var similarListElement = document.querySelector('.setup-similar-list');
   var fragment = document.createDocumentFragment();
-  var descriptionWizards = generateRandomDescriptionWizards();
 
   for (var i = 0; i < COUNT_SIMILAR_WIZARD; i++) {
+    descriptionWizards.push(generateRandomDescriptionWizard());
     fragment.appendChild(renderWizard(descriptionWizards[i]));
   }
   similarListElement.appendChild(fragment);
