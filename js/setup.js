@@ -9,10 +9,10 @@ var descriptionWizards = [];
 
 var generateRandomDescriptionWizard = function () {
   return {
-      name: NAMES[Math.floor(Math.random() * NAMES.length)] + ' ' + FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)],
-      coatColor: COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)],
-      eyeColor: EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)]
-    };
+    name: NAMES[Math.floor(Math.random() * NAMES.length)] + ' ' + FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)],
+    coatColor: COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)],
+    eyeColor: EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)]
+  };
 };
 
 var renderWizard = function (descriptionWizard) {
