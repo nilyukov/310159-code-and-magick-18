@@ -89,11 +89,15 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 var wizardCoatClickHandler = function () {
-  document.querySelector('.wizard-coat').style.fill = COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)];
+  var randomWizardCoatFill =  COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)];
+  setupPlayer.querySelector('.wizard-coat').style.fill = randomWizardCoatFill;
+  setupPlayer.querySelector('[name=coat-color]').value = randomWizardCoatFill;
 };
 
 var wizardEyesClickHandler = function () {
-  document.querySelector('.wizard-eyes').style.fill = EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)];
+  var randomWizardEyesFill = EYE_COLORS[Math.floor(Math.random() * EYE_COLORS.length)];
+  setupPlayer.querySelector('.wizard-eyes').style.fill = randomWizardEyesFill;
+  setupPlayer.querySelector('[name=eyes-color]').value = randomWizardEyesFill;
 };
 
 var fireballClickHandler = function () {
