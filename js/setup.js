@@ -89,7 +89,7 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 var wizardCoatClickHandler = function () {
-  var randomWizardCoatFill =  COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)];
+  var randomWizardCoatFill = COAT_COLORS[Math.floor(Math.random() * COAT_COLORS.length)];
   setupPlayer.querySelector('.wizard-coat').style.fill = randomWizardCoatFill;
   setupPlayer.querySelector('[name=coat-color]').value = randomWizardCoatFill;
 };
