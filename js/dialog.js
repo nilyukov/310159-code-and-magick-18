@@ -1,0 +1,108 @@
+'use strict';
+
+(function () {
+  var setup = document.querySelector('.setup');
+  var setupPlayer = document.querySelector('.setup-player');
+  var userNameInput = setup.querySelector('.setup-user-name');
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setup.querySelector('.setup-close');
+  var wizardCoat = setupPlayer.querySelector('.wizard-coat');
+  var wizardEyes = setupPlayer.querySelector('.wizard-eyes');
+  var fireball = setupPlayer.querySelector('.setup-fireball-wrap');
+  var coatHiddenInput = setupPlayer.querySelector('[name=coat-color]');
+  var eyesHiddenInput = setupPlayer.querySelector('[name=eyes-color]');
+  var fireballHiddenInput = setupPlayer.querySelector('[name=fireball-color]');
+
+  var popupEscPressHandler = function (evt) {
+    window.util.isEscEvent(evt, closePopup);
+  };
+
+  var popupEnterPressHandler = function (evt) {
+    window.util.isEnterEvent(evt, openPopup);
+  };
+
+  var setupEnterPressHandler = function (evt) {
+    window.util.isEnterEvent(evt, closePopup);
+  };
+
+  var openPopup = function () {
+    setup.classList.remove('hidden');
+    document.addEventListener('keydown', popupEscPressHandler);
+  };
+
+  var closePopup = function () {
+    setup.classList.add('hidden');
+    setup.removeAttribute('style');
+    document.removeEventListener('keydown', popupEscPressHandler);
+  };
+
+  setupOpen.addEventListener('click', function () {
+    openPopup();
+  });
+
+  setupOpen.addEventListener('keydown', popupEnterPressHandler);
+
+  setupClose.addEventListener('click', function () {
+    closePopup();
+  });
+
+  setupClose.addEventListener('keydown', setupEnterPressHandler);
+
+  userNameInput.addEventListener('keydown', function (evt) {
+    evt.stopPropagation();
+  });
+
+  window.colorize(wizardCoat, window.util.COAT_COLORS, coatHiddenInput);
+  window.colorize(wizardEyes, window.util.EYE_COLORS, eyesHiddenInput);
+  window.colorize(fireball, window.util.FIREBALL_COLORS, fireballHiddenInput);
+
+  var dialogHandler = setup.querySelector('.upload');
+
+  dialogHandler.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    var dragged = false;
+
+    var mouseMoveHandler = function (moveEvt) {
+      moveEvt.preventDefault();
+      dragged = true;
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      setup.style.top = (setup.offsetTop - shift.y) + 'px';
+      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+    };
+
+    var mouseUpHandler = function (upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+
+      if (dragged) {
+        var clickPreventDefaultHandler = function (preventEvt) {
+          preventEvt.preventDefault();
+          dialogHandler.removeEventListener('click', clickPreventDefaultHandler);
+        };
+        dialogHandler.addEventListener('click', clickPreventDefaultHandler);
+      }
+
+    };
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  });
+})();
