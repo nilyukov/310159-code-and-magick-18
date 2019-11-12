@@ -4,7 +4,6 @@
   var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var FIRST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var COUNT_SIMILAR_WIZARD = 4;
-
   var descriptionWizards = [];
   var generateRandomDescriptionWizard = function () {
     return {
