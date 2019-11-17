@@ -105,4 +105,16 @@
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   });
+
+  var form = setup.querySelector('.setup-wizard-form');
+
+
+  var succesHandler = function () {
+    setup.classList.add('hidden');
+  };
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), succesHandler, window.util.errorHandler);
+    evt.preventDefault();
+  });
 })();
