@@ -4,7 +4,7 @@
   var COUNT_SIMILAR_WIZARD = 4;
 
   var renderWizard = function (wizard) {
-    var similarWizardTemplate = document.querySelector('#similar-wizard-template').content
+    var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
