@@ -99,7 +99,6 @@
         };
         dialogHandler.addEventListener('click', clickPreventDefaultHandler);
       }
-
     };
 
     document.addEventListener('mousemove', mouseMoveHandler);
@@ -107,7 +106,6 @@
   });
 
   var form = setup.querySelector('.setup-wizard-form');
-
 
   var succesHandler = function () {
     setup.classList.add('hidden');
