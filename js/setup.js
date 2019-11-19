@@ -13,7 +13,7 @@
     return wizardElement;
   };
 
-  var fillSimilarList = function (wizards) {
+  var fillSimilarListHandler = function (wizards) {
     var similarListElement = document.querySelector('.setup-similar-list');
     var fragment = document.createDocumentFragment();
 
@@ -24,5 +24,5 @@
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  window.backend.load(fillSimilarList, window.util.errorHandler);
+  window.backend.load(fillSimilarListHandler, window.util.errorHandler);
 })();
