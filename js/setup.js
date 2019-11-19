@@ -1,28 +1,57 @@
 'use strict';
 
 (function () {
-  var COUNT_SIMILAR_WIZARD = 4;
+  var coatColor;
+  var eyesColor;
+  var allWizards = [];
 
-  var renderWizard = function (wizard) {
-    var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-    var wizardElement = similarWizardTemplate.cloneNode(true);
+  var getRank = function (wizard) {
+    var rank = 0;
 
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-    return wizardElement;
-  };
-
-  var fillSimilarListHandler = function (wizards) {
-    var similarListElement = document.querySelector('.setup-similar-list');
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < COUNT_SIMILAR_WIZARD; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
     }
-    similarListElement.appendChild(fragment);
-    document.querySelector('.setup-similar').classList.remove('hidden');
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
+
+    return rank;
   };
 
-  window.backend.load(fillSimilarListHandler, window.util.errorHandler);
+  var namesComparator = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+
+  var updateWizards = function () {
+    window.render(allWizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesComparator(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  };
+
+  window.wizard.eyesChangeHandler = function (color) {
+    eyesColor = color;
+    window.debounce(updateWizards);
+  };
+
+  window.wizard.coatChangeHandler = function (color) {
+    coatColor = color;
+    window.debounce(updateWizards);
+  };
+
+  var successHandler = function (wizards) {
+    allWizards = wizards;
+    updateWizards();
+  };
+
+  window.backend.load(successHandler, window.util.errorHandler);
 })();

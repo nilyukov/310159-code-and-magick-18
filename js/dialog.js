@@ -2,16 +2,9 @@
 
 (function () {
   var setup = document.querySelector('.setup');
-  var setupPlayer = document.querySelector('.setup-player');
   var userNameInput = setup.querySelector('.setup-user-name');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  var wizardCoat = setupPlayer.querySelector('.wizard-coat');
-  var wizardEyes = setupPlayer.querySelector('.wizard-eyes');
-  var fireball = setupPlayer.querySelector('.setup-fireball-wrap');
-  var coatHiddenInput = setupPlayer.querySelector('[name=coat-color]');
-  var eyesHiddenInput = setupPlayer.querySelector('[name=eyes-color]');
-  var fireballHiddenInput = setupPlayer.querySelector('[name=fireball-color]');
 
   var popupEscPressHandler = function (evt) {
     window.util.isEscEvent(evt, closePopup);
@@ -51,10 +44,6 @@
   userNameInput.addEventListener('keydown', function (evt) {
     evt.stopPropagation();
   });
-
-  window.colorize(wizardCoat, window.util.COAT_COLORS, coatHiddenInput);
-  window.colorize(wizardEyes, window.util.EYE_COLORS, eyesHiddenInput);
-  window.colorize(fireball, window.util.FIREBALL_COLORS, fireballHiddenInput);
 
   var dialogHandler = setup.querySelector('.upload');
 
