@@ -4,36 +4,36 @@
   var URL_POST = 'https://js.dump.academy/code-and-magick';
   var URL_GET = 'https://js.dump.academy/code-and-magick/data';
   window.backend = {
-    load: function (onLoad, onError) {
+    load: function (loadHandler, errorHandler) {
 
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {
         if (xhr.status === 200) {
-          onLoad(xhr.response);
+          loadHandler(xhr.response);
         } else {
-          onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+          errorHandler('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
         }
       });
       xhr.addEventListener('error', function () {
-        onError('Произошла ошибка соединения');
+        errorHandler('Произошла ошибка соединения');
       });
 
       xhr.open('GET', URL_GET);
       xhr.send();
     },
-    save: function (data, onLoad, onError) {
+    save: function (data, loadHandler, errorHandler) {
 
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {
-        onLoad(xhr.response);
+        loadHandler(xhr.response);
       });
 
       xhr.addEventListener('error', function () {
-        onError('Произошла ошибка соединения');
+        errorHandler('Произошла ошибка соединения');
       });
 
       xhr.open('POST', URL_POST);
